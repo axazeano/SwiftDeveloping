@@ -30,10 +30,19 @@ for (food, value) in polarizingFoods {
 //: The Oakland area code is changing from 415 to 510. Replace all occurrences of the area code 415 with 510 in the dictionary below.
 var rapperPhoneNumbers = ["Azealia Banks":"(212)548-8777", "Boots Riley":"(415)755-9887", "MC Hammer":"(415)533-9899", "Missy Elliot":"(757)488-5552", "Shock G":"(415)499-7676", "Sir Mix-a-lot":"(206)123-4567", "Snoop Dogg":"(213)760-6664"]
 
-for telephoneNumber in rapperPhoneNumbers.values {
-    
-    telephoneNumber.replaceRange(Range(1, 4), with: "510")
+var rightPhoneNumbers = [String: String]()
+for (subject, telephoneNumber) in rapperPhoneNumbers {
+    if (telephoneNumber.containsString("(415)")) {
+        var wrongNumber = telephoneNumber
+        let rng = Range(start: wrongNumber.startIndex.advancedBy(1), end: wrongNumber.startIndex.advancedBy(4))
+        wrongNumber.replaceRange(rng, with: "510")
+        rightPhoneNumbers[subject] = wrongNumber
+    } else {
+        rightPhoneNumbers[subject] = telephoneNumber
+    }
 }
+
+rightPhoneNumbers
 //: ## Switch Statements
 //: Translate the following if-else statements into switch statements. Feel free to modify print statements as desired.
 //: ### Exercise 5
